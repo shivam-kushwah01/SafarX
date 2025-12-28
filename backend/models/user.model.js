@@ -29,6 +29,11 @@ const userSchema = new mongoose.Schema({
     socketId: {
         type: String,
     }
+    ,
+    location: {
+        lat: { type: Number },
+        lon: { type: Number }
+    }
 })
 
 userSchema.methods.generateAuthToken = function() {

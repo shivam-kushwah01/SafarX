@@ -193,4 +193,207 @@ POST
 
 ---
 
+## POST /captain/register
+
+### Description
+Register a new captain (driver) with vehicle details. The endpoint validates captain data, hashes the password, saves the captain record and returns a JWT plus the created captain object.
+
+### Method
+POST
+
+### URL (when routes are mounted)
+- If the captain router is mounted at `/captain`, the full path is: `/captain/register`.
+
+### Request body (application/json)
+```
+{
+  "fullname": { "firstname": "string (required, min 3)", "lastname": "string (optional)" },
+  "email": "string (required, valid email)",
+  "password": "string (required, min 6)",
+  "vehicle": {
+    "color": "string (required, min 3)",
+    "plate": "string (required, min 3)",
+    "capacity": number (required, min 1),
+    "vehicleType": "string (required)" // one of: "car", "bike", "auto"
+  }
+}
+```
+
+### Validation rules (express-validator & Mongoose)
+- `fullname.firstname` — required, minimum length 3
+- `email` — required, must be a valid email
+- `password` — required, minimum length 6
+- `vehicle.color` — required, minimum length 3
+- `vehicle.plate` — required, minimum length 3
+- `vehicle.capacity` — required, integer >= 1
+- `vehicle.vehicleType` — required, one of `car`, `bike`, `auto`
+
+### Controller / Service behavior
+- The controller uses `validationResult` to return `400` when request validation fails.
+- It checks for an existing captain by email and returns `400` if found.
+- Password is hashed using `captainModel.hashPassword` before creating the record.
+- The service creates and `save()`s a `Captain` document (throws an Error if required fields are missing).
+
+### Responses / Status Codes
+- **201 Created**
+  - Successful registration. Returns a JWT and the created captain object (including `_id`, `fullname`, `email`, `vehicle`, etc.).
+  - Example body:
+    ```json
+    {
+      "token": "<jwt token>",
+      "captain": {
+        "_id": "<captain id>",
+        "fullname": { "firstname": "John", "lastname": "Smith" },
+        "email": "john.smith@example.com",
+        "vehicle": { "color": "red", "plate": "ABC123", "capacity": 4, "vehicleType": "car" },
+        "status": "inactive",
+        "socketId": null
+      }
+    }
+    ```
+- **400 Bad Request**
+  - Returned when validation fails (express-validator), when the email is already used, or when the service throws a 'Missing required fields' Error.
+  - Example (validation errors):
+    ```json
+    { "errors": [ { "msg": "First name must be at least 3 characters long", "param": "fullname.firstname" } ] }
+    ```
+- **500 Internal Server Error**
+  - Unexpected server/database errors (e.g., DB connection or save failure).
+
+### Example requests
+- curl:
+```bash
+curl -X POST http://localhost:3000/captain/register \
+  -H "Content-Type: application/json" \
+  -d '{
+    "fullname": {"firstname": "John", "lastname": "Smith"},
+    "email": "john.smith@example.com",
+    "password": "s3cretpass",
+    "vehicle": {"color":"red","plate":"ABC123","capacity":4,"vehicleType":"car"}
+  }'
+```
+
+- PowerShell:
+```powershell
+Invoke-RestMethod -Method Post -Uri http://localhost:3000/captain/register -ContentType 'application/json' -Body (
+  '{"fullname":{"firstname":"John","lastname":"Smith"},"email":"john.smith@example.com","password":"s3cretpass","vehicle":{"color":"red","plate":"ABC123","capacity":4,"vehicleType":"car"}}'
+)
+```
+
+### Tips
+- Ensure `Content-Type: application/json` is set in Postman.
+- Make sure `vehicle.vehicleType` is one of the allowed values: `car`, `bike`, or `auto`.
+- If you see `Missing required fields` logged from the service, verify the JSON shape in the request (fields under `fullname` and `vehicle`).
+- Consider returning `409 Conflict` for duplicate emails in future for clearer semantics.
+
+---
+
+## Captain Authentication Endpoints
+
+### POST /captain/login
+
+#### Description
+Authenticate a captain and return a JWT and the captain object. The controller sets a cookie named `token` and also returns the token in the response body.
+
+#### Method
+POST
+
+#### Request body (application/json)
+```
+{
+  "email": "string (required, valid email)",
+  "password": "string (required, min 6 chars)"
+}
+```
+
+#### Validation rules
+- `email` — required, must be a valid email
+- `password` — required, minimum length 6
+
+#### Responses / Status Codes
+- **200 OK**
+  - Login successful. Response includes a `token` and the `captain` object. The server also sets a cookie: `token`.
+  - Example:
+    ```json
+    {
+      "token": "<jwt token>",
+      "captain": {
+        "_id": "<captain id>",
+        "fullname": { "firstname": "John", "lastname": "Smith" },
+        "email": "john.smith@example.com",
+        "vehicle": { "color": "red", "plate": "ABC123", "capacity": 4, "vehicleType": "car" }
+      }
+    }
+    ```
+- **400 Bad Request**
+  - Returned when request validation fails. Example body uses the `errors` array from `express-validator`.
+- **401 Unauthorized** (or 400 in current implementation)
+  - Returned when credentials are invalid. The current controller returns a 400 with `{ error: 'Invalid email or password' }` for invalid credentials; consider using 401 for clarity.
+- **500 Internal Server Error**
+  - Unexpected server error.
+
+#### Notes
+- The controller sets a cookie via `res.cookie('token', token)` — ensure `cookie-parser` (or equivalent) is configured if you rely on cookie-based auth.
+
+---
+
+### GET /captain/profile
+
+#### Description
+Return the authenticated captain's profile. This route is protected by `authMiddleware.authCaptain`, which should verify the JWT and attach the captain to `req.captain`.
+
+#### Method
+GET
+
+#### Authentication
+- Requires a valid JWT provided in either:
+  - `Authorization: Bearer <token>` header, OR
+  - Cookie named `token`
+
+#### Request body
+- None
+
+#### Responses / Status Codes
+- **200 OK**
+  - Returns `{ captain: <captainObject> }` when authentication succeeds.
+- **401 Unauthorized**
+  - When authentication is missing or invalid.
+- **500 Internal Server Error**
+  - Unexpected server errors.
+
+#### Example
+```json
+{ "captain": { "_id": "<captain id>", "fullname": { "firstname": "John" }, "email": "john@example.com" } }
+```
+
+---
+
+### GET /captain/logout
+
+#### Description
+Logs out the authenticated captain. The controller blacklists the token (saves it to `blacklistTokenModel`), clears the `token` cookie, and returns a success message.
+
+#### Method
+GET
+
+#### Authentication
+- Requires a valid JWT (cookie or Authorization header).
+
+#### Request body
+- None
+
+#### Responses / Status Codes
+- **200 OK**
+  - `{ "message": "Logged out successfully" }` when logout completes and token is saved to blacklist.
+- **401 Unauthorized**
+  - When authentication is missing or invalid.
+- **500 Internal Server Error**
+  - When saving to blacklist or clearing cookie fails.
+
+#### Notes
+- The logout controller reads the token from `req.cookies.token` or from `Authorization` header. Ensure your app parses cookies if you rely on cookie-based auth.
+- Consider returning `204 No Content` for logout in the future. Also consider adding TTL or automatic cleanup for blacklisted tokens.
+
+
+
 
