@@ -34,7 +34,7 @@ const Captainlogin = () => {
     return (
         <div className='p-7 flex flex-col justify-between h-screen'>
             <div>
-                <img className='w-20 mb-10' src={safarX} alt="" />
+                <img className='w-20 -ml-1 mb-2' src={safarX} alt="" />
 
             <form onSubmit={(e) => handleSubmit(e)}>
                 <h3 className='text-xl font-medium mb-2'>What's your email</h3>
