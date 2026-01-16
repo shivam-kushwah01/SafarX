@@ -31,7 +31,7 @@ const CaptainRiding = () => {
 
 
     return (
-        <div className="h-screen">
+        <div className="min-h-[100dvh]">
             <div className="fixed top-0 w-screen flex justify-between items-center z-10">
                 <img className='w-20 fixed left-2 top-3' src={safarX} alt="" />
                 <Link to='/captain-home' className="fixed right-2 top-2 h-10 w-10 bg-white flex items-center justify-center rounded-full">

@@ -218,7 +218,7 @@ const Home = () => {
     }
 
     return (
-        <div className="h-screen overflow-hidden relative">
+        <div className="min-h-[100dvh] overflow-hidden relative">
             <img className='w-20 fixed z-9 left-2 top-2' src={safarX} alt="" />
             <div className="w-screen h-screen">
                 <LiveTracking

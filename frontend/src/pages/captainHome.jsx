@@ -102,7 +102,7 @@ const CaptainHome = () => {
     }
 
     return (
-        <div className="h-screen">
+        <div className="min-h-[100dvh]">
             <div className="fixed p-6 top-0 z-10">
                 <img className="w-20 fixed left-2 top-3" src={safarX} alt="" />
                 <Link to='/home' className="fixed right-2 top-2 h-10 w-10 bg-white flex items-center justify-center rounded-full">

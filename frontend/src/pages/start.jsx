@@ -7,7 +7,7 @@ import { UserDataContext } from '../context/userContext.jsx';
 const Start = () => {
     return (
         <div>
-            <div className='bg-cover bg-[url(https://images.unsplash.com/photo-1619059558110-c45be64b73ae?w=700&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8dHJhZmZpYyUyMGxpZ2h0fGVufDB8fDB8fHww)] h-screen pt-8 flex justify-between flex-col w-full'>
+            <div className='bg-cover bg-[url(https://images.unsplash.com/photo-1619059558110-c45be64b73ae?w=700&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8dHJhZmZpYyUyMGxpZ2h0fGVufDB8fDB8fHww)] min-h-[100dvh] pt-8 flex justify-between flex-col w-full'>
                 <img className='w-20 -mt-5 ml-3' src={safarX} alt="" />
                 <div className='bg-white pb-7 py-4 px-4'>
                     <h2 className='text-2xl font-bold'>Get Started with SafarX</h2>

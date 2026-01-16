@@ -32,7 +32,7 @@ const Captainlogin = () => {
     }
 
     return (
-        <div className='p-7 flex flex-col justify-between h-screen'>
+        <div className='p-7 flex flex-col justify-between min-h-[100dvh]'>
             <div>
                 <img className='w-20 -ml-1 mb-2' src={safarX} alt="" />
 

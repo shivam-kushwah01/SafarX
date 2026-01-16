@@ -22,7 +22,7 @@ const Riding = () => {
 
 
     return (
-        <div className="h-screen">
+        <div className="min-h-[100dvh]">
             <Link to='/home' className="fixed z-10 right-2 top-2 h-10 w-10 bg-white flex items-center justify-center rounded-full">
                 <i className="text-lg font-medium ri-home-9-fill"></i>
             </Link>
