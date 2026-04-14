@@ -114,7 +114,7 @@ const CaptainHome = () => {
                 ride={ride}
                 />
             </div>
-            <div className="fixed w-full bg-white h-[35%] p-5 z-10 overflow-y-hidden">
+            <div className="fixed w-full bg-white h-[35%] p-5 z-10 overflow-y-hidden bottom-0">
                 <CaptainDetails />
             </div>
             <div ref={ridePopupPanelRef} className="fixed translate-y-full z-10 bottom-0 px-3 py-10 bg-white w-full">

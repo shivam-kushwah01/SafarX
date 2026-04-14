@@ -4,7 +4,7 @@ import uberCar from '../assets/uberCar-removebg-preview.png';
 
 const LookingForDriver = (props) => {
     return (
-        <div>
+        <div className="translate-y-full fixed z-10 bottom-0 px-3 py-5 pt-10 bg-white w-full">
                     <h5 onClick={() => {
                             props.setVehicleFound(false);
                         }} className="w-full p-1 text-center absolute top-0"><i className="text-3xl color-gray ri-arrow-down-wide-fill"></i>

@@ -211,7 +211,7 @@ const Home = () => {
                     Authorization: `Bearer ${localStorage.getItem('token')}`
                 }
             });
-            response.status(200).json({ message: 'Ride created successfully' });
+            console.log({ message: 'Ride created successfully' });
         } catch (error) {
             console.error('Error creating ride:', error);
         }
@@ -220,12 +220,12 @@ const Home = () => {
     return (
         <div className="min-h-[100dvh] overflow-hidden relative">
             <img className='w-20 fixed z-9 left-2 top-2' src={safarX} alt="" />
-            <div className="w-screen h-screen">
+            <div className="w-screen min-h-[100dvh]">
                 <LiveTracking
                 ride={ride}
                 />
             </div>
-            <div className="fixed z-10 flex flex-col justify-end absolute w-full top-0 h-screen">
+            <div className="fixed z-10 flex flex-col justify-end absolute w-full top-0 h-full">
                 <div className="bg-white p-6 h-[35%]">
                     <h5 ref={panelCloseRef} onClick={() => {
                         setPanel(false);

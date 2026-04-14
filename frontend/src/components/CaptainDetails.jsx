@@ -9,7 +9,7 @@ const CaptainDetails = () => {
         <div className="h-screen bg-white w-full">
             <div className="flex items-center justify-between">
                     <div className="flex items-center justify-start gap-2">
-                        <img className="h-10 w-10 rounded-full object-cover" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBHbvzAQOAEvoGlHkYUn9wCp-g0oiBmgkQvA&s" alt="" />
+                        <img className="h-10 w-10 rounded-full object-cover" src="https://www.pngplay.com/wp-content/uploads/12/User-Avatar-Profile-PNG-Pic-Clip-Art-Background.png" alt="" />
                         <h4 className="text-lg font-semibold capitalize">{captain.fullname.firstname + " " + captain.fullname.lastname}</h4>
                     </div>
                     <div>
