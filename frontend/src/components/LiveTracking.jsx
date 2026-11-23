@@ -138,14 +138,14 @@ const LiveTracking = ({ ride }) => {
 
   if (!center) {
     return (
-      <div className="h-[450px] flex items-center justify-center">
+      <div className="h-[100dvh] w-full flex items-center justify-center">
         Loading map…
       </div>
     );
   }
 
     return (
-    <div className="fixed h-screen w-screen">
+    <div className="fixed inset-0">
       <MapContainer
       center={center}
       zoom={13}

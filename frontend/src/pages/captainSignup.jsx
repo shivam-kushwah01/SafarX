@@ -59,7 +59,8 @@ const CaptainSignup = () => {
     }
 
     return (
-        <div className='p-7 flex flex-col justify-between min-h-[100dvh]'>
+        <div className='auth-page'>
+        <div className='auth-card'>
             <div>
                 <img className='w-20 -ml-1 mb-2' src={safarX} alt="" />
 
@@ -72,7 +73,7 @@ const CaptainSignup = () => {
                 value={firstName}
                 onChange={(e) => setFirstName(e.target.value)}
                 placeholder="First name" 
-                className ='bg-[#eeeeee] rounded px-4 py-2 w-1/2 border text-lg placeholder:text-base '
+                className ='bg-[#eeeeee] rounded px-4 py-2 w-1/2 min-w-0 border text-lg placeholder:text-base '
                 required 
                 />
                 <input 
@@ -80,7 +81,7 @@ const CaptainSignup = () => {
                 value={lastName}
                 onChange={(e) => setLastName(e.target.value)}
                 placeholder="Last name" 
-                className ='bg-[#eeeeee] rounded px-4 py-2 w-1/2 border text-lg placeholder:text-base '
+                className ='bg-[#eeeeee] rounded px-4 py-2 w-1/2 min-w-0 border text-lg placeholder:text-base '
                 required 
                 />
                 </div>
@@ -130,7 +131,7 @@ const CaptainSignup = () => {
                 />
 
                 <div className='flex gap-4 mb-6'>
-                <div className='w-1/2'>
+                <div className='w-1/2 min-w-0'>
                     <h3 className='text-lg font-medium mb-2'>Capacity</h3>
                     <input
                     type="number"
@@ -143,7 +144,7 @@ const CaptainSignup = () => {
                     />
                 </div>
 
-                <div className='w-1/2'>
+                <div className='w-1/2 min-w-0'>
                     <h3 className='text-lg font-medium mb-2'>Vehicle type</h3>
                     <select
                         value={vehicleType}
@@ -163,12 +164,13 @@ const CaptainSignup = () => {
                 className ='bg-[#111] text-white font-semibold mb-2 rounded px-4 py-2 border w-full text-lg placeholder:text-base '
                 >Register</button>
 
-                <p className='text-center'>Already have an Account?<Link to="/captain-login" className='text-blue-600'>Login here</Link></p>
+                <p className='text-center'>Already have an Account? <Link to="/captain-login" className='text-blue-600'>Login here</Link></p>
             </form>
             </div>
             <div>
             <p className='text-[10px] mt-5 mb-5 leading-tight'>This site is protected by reCAPTCHA and the <span className='underline'>Google Privacy Policy</span> and <span className='underline'>Terms of Service</span> apply</p>
             </div>
+        </div>
         </div>
     );
 }

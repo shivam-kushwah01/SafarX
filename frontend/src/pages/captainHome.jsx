@@ -72,7 +72,7 @@ const CaptainHome = () => {
         }
         else{
             gsap.to(ridePopupPanelRef.current, {
-            transform:'translateY(100%)'
+            transform:'translateY(120%)'
         })
         }
     }, [ridePopupPanel]);
@@ -85,7 +85,7 @@ const CaptainHome = () => {
         }
         else{
             gsap.to(confirmRidePopupPanelRef.current, {
-            transform:'translateY(100%)'
+            transform:'translateY(120%)'
         })
         }
     }, [confirmRidePopupPanel]);
@@ -114,10 +114,10 @@ const CaptainHome = () => {
                 ride={ride}
                 />
             </div>
-            <div className="fixed w-full bg-white h-[35%] p-5 z-10 overflow-y-hidden bottom-0">
+            <div className="sheet h-[35%] p-5 md:h-auto">
                 <CaptainDetails />
             </div>
-            <div ref={ridePopupPanelRef} className="fixed translate-y-full z-10 bottom-0 px-3 py-10 bg-white w-full">
+            <div ref={ridePopupPanelRef} className="sheet translate-y-[120%] px-3 py-10">
                 <RidePopup 
                 ride={ride}
                 confirmRide={confirmRide}
@@ -125,7 +125,7 @@ const CaptainHome = () => {
                 setConfirmRidePopupPanel={setConfirmRidePopupPanel}
                 />
             </div>
-            <div ref={confirmRidePopupPanelRef} className="fixed translate-y-full z-10 bottom-0 px-3 py-10 bg-white w-full h-full">
+            <div ref={confirmRidePopupPanelRef} className="sheet translate-y-[120%] px-3 py-10 h-full md:h-auto">
                 <ConfirmRidePopup 
                 ride={ride} 
                 setConfirmRidePopupPanel={setConfirmRidePopupPanel} 

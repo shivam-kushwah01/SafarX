@@ -87,7 +87,7 @@ const ConfirmRidePopup = (props) => {
                                         setOtp(e.target.value)
                                     }}
                                     />
-                                <div className="flex gap-2 fixed bottom-5 w-[94%]">
+                                <div className="flex gap-2 fixed bottom-5 w-[94%] md:static md:w-full md:mt-4">
                                     <button onClick={() => {
                                 props.setConfirmRidePopupPanel(false);
                              }

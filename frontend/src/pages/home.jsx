@@ -138,7 +138,7 @@ const Home = () => {
         }
         else{
             gsap.to(vehiclePanelRef.current, {
-            transform:'translateY(100%)'
+            transform:'translateY(120%)'
         })
         }
     }, [vehiclePanel]);
@@ -151,7 +151,7 @@ const Home = () => {
         }
         else{
             gsap.to(confirmRidePanelRef.current, {
-            transform:'translateY(100%)'
+            transform:'translateY(120%)'
         })
         }
     }, [confirmRidePanel]);
@@ -164,7 +164,7 @@ const Home = () => {
         }
         else{
             gsap.to(vehicleFoundRef.current, {
-            transform:'translateY(100%)'
+            transform:'translateY(120%)'
         })
         }
     }, [vehicleFound]);
@@ -177,7 +177,7 @@ const Home = () => {
         }
         else{
             gsap.to(waitingForDriverRef.current, {
-            transform:'translateY(100%)'
+            transform:'translateY(120%)'
         })
         }
     }, [waitingForDriver]);
@@ -219,14 +219,14 @@ const Home = () => {
 
     return (
         <div className="min-h-[100dvh] overflow-hidden relative">
-            <img className='w-20 fixed z-9 left-2 top-2' src={safarX} alt="" />
-            <div className="w-screen min-h-[100dvh]">
+            <img className='w-20 fixed z-9 left-2 top-2 md:left-auto md:right-4 md:top-4' src={safarX} alt="" />
+            <div className="w-full min-h-[100dvh]">
                 <LiveTracking
                 ride={ride}
                 />
             </div>
-            <div className="fixed z-10 flex flex-col justify-end absolute w-full top-0 h-full">
-                <div className="bg-white p-6 h-[35%]">
+            <div className="fixed z-10 flex flex-col justify-end w-full top-0 left-0 h-full md:justify-start md:top-4 md:bottom-4 md:left-4 md:w-[420px] md:h-auto md:pointer-events-none">
+                <div className="relative bg-white p-6 h-[35%] md:h-auto md:rounded-2xl md:shadow-2xl md:pointer-events-auto">
                     <h5 ref={panelCloseRef} onClick={() => {
                         setPanel(false);
                     }} className="absolute opacity-0 right-6 top-6 text-2xl" >
@@ -268,7 +268,7 @@ const Home = () => {
                 onClick={findTrip}
                 className="w-full mt-3 bg-yellow-400 text-black font-bold px-4 py-2 rounded-lg">Find Trip</button>
                 </div>
-                <div ref={panelRef} className="opacity-0 h-0 bg-white">
+                <div ref={panelRef} className="opacity-0 h-0 bg-white overflow-y-auto md:mt-3 md:rounded-2xl md:shadow-2xl md:pointer-events-auto">
                      <LocationSearchPanel 
                         setPanel={setPanel} 
                         setVehiclePanel={setVehiclePanel}
@@ -280,7 +280,7 @@ const Home = () => {
                 </div>
             </div>
             <div ref={vehiclePanelRef} 
-            className="translate-y-full fixed z-10 bottom-0 px-3 py-10 bg-white w-full">
+            className="sheet translate-y-[120%] px-3 py-10">
                  <VehiclePanel 
                  setConfirmRidePanel={setConfirmRidePanel} 
                  setVehiclePanel={setVehiclePanel} 
@@ -289,7 +289,7 @@ const Home = () => {
                  />
             </div>
             <div ref={confirmRidePanelRef} 
-            className="translate-y-full fixed z-10 bottom-0 px-3 py-5 pt-10 bg-white w-full">
+            className="sheet translate-y-[120%] px-3 py-5 pt-10">
                  <ConfirmRide 
                  vehicleType={vehicleType}
                  fares={fare} 
@@ -300,7 +300,7 @@ const Home = () => {
                  setVehicleFound={setVehicleFound}
                  />
             </div>
-              <div ref={vehicleFoundRef} className="translate-y-full fixed z-10 bottom-0 px-3 py-5 pt-10 bg-white w-full">
+              <div ref={vehicleFoundRef} className="sheet translate-y-[120%] px-3 py-5 pt-10">
                   <LookingForDriver 
                   vehicleType={vehicleType}
                   fares={fare} 
@@ -310,7 +310,7 @@ const Home = () => {
                   setVehiclePanel={setVehiclePanel} 
                   />
               </div>
-              <div ref={waitingForDriverRef} className="translate-y-full fixed z-10 bottom-0 px-3 py-5 pt-10 bg-white w-full">
+              <div ref={waitingForDriverRef} className="sheet translate-y-[120%] px-3 py-5 pt-10">
                   <WaitForDriver
                   ride={ride} 
                   waitingForDriver={waitingForDriver} 

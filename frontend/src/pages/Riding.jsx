@@ -31,7 +31,7 @@ const Riding = () => {
                 ride={ride}
                 />
             </div>
-            <div className="h-1/2 p-4 fixed z-10 w-full bottom-0 bg-white">
+            <div className="sheet h-1/2 p-4 md:h-auto md:p-6">
             <div className="flex items-center justify-between">
                                             <img className="h-15" src={uberCar} alt="" />
                                             <div className="text-right">

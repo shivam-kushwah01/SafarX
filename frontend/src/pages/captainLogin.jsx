@@ -32,7 +32,8 @@ const Captainlogin = () => {
     }
 
     return (
-        <div className='p-7 flex flex-col justify-between min-h-[100dvh]'>
+        <div className='auth-page'>
+        <div className='auth-card'>
             <div>
                 <img className='w-20 -ml-1 mb-2' src={safarX} alt="" />
 
@@ -63,7 +64,7 @@ const Captainlogin = () => {
                 className ='bg-[#111] text-white font-semibold mb-7 rounded px-4 py-2 border w-full text-lg placeholder:text-base '
                 >Login</button>
 
-                <p className='text-center'>New Captain here?<Link to="/captain-signup" className='text-blue-600'>Register as a Captain</Link></p>
+                <p className='text-center'>New Captain here? <Link to="/captain-signup" className='text-blue-600'>Register as a Captain</Link></p>
             </form>
             </div>
             <div>
@@ -72,6 +73,7 @@ const Captainlogin = () => {
                 className ='bg-[#d5622d] flex justify-center items-center text-white font-semibold mb-5 rounded px-4 py-2 border w-full text-lg placeholder:text-base '
                 >Sign in as User</Link>
             </div>
+        </div>
         </div>
     );
 }

@@ -6,11 +6,11 @@ const CaptainDetails = () => {
     const { captain } = useContext(CaptainDataContext);
 
     return (
-        <div className="h-screen bg-white w-full">
-            <div className="flex items-center justify-between">
-                    <div className="flex items-center justify-start gap-2">
+        <div className="bg-white w-full">
+            <div className="flex items-center justify-between gap-3">
+                    <div className="flex items-center justify-start gap-2 min-w-0">
                         <img className="h-10 w-10 rounded-full object-cover" src="https://www.pngplay.com/wp-content/uploads/12/User-Avatar-Profile-PNG-Pic-Clip-Art-Background.png" alt="" />
-                        <h4 className="text-lg font-semibold capitalize">{captain.fullname.firstname + " " + captain.fullname.lastname}</h4>
+                        <h4 className="text-lg font-semibold capitalize truncate">{captain.fullname.firstname + " " + captain.fullname.lastname}</h4>
                     </div>
                     <div>
                         <h4 className="text-xl font-semibold">₹295.30</h4>
